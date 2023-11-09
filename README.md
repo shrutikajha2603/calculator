@@ -3,7 +3,7 @@ This is a simple calculator website created using HTML, CSS, and JavaScript. It 
 <br>
 
 ## Demo
-You can try out the calculator by visiting https://calculatorjss.vercel.app/
+You can try out the calculator by visiting https://basiccalculatorjs.vercel.app/
 <br>
 
 ## Features
