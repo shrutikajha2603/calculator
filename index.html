@@ -22,18 +22,12 @@
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'1';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('1');">
             1
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'2';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('2');">
             2
           </button>
           <button
@@ -46,18 +40,12 @@
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'3';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('3');">
             3
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'4';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('4');">
             4
           </button>
           <button
@@ -70,18 +58,12 @@
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'5';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('5');">
             5
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'6';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('6');">
             6
           </button>
           <button
@@ -94,18 +76,12 @@
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'7';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('7');">
             7
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'8';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('8');">
             8
           </button>
           <button
@@ -118,20 +94,13 @@
           </button>
           <button
             class="button"
-            onclick="
-            let result=eval(currentDisplay);
-            currentDisplay=result;
-            document.querySelector('#display').value=currentDisplay;
-            "
+            onclick="calculate();"
           >
             =
           </button>
           <button
             class="button"
-            onclick="currentDisplay=currentDisplay+'9';
-            document.querySelector('#display').value=currentDisplay;
-            "
-          >
+            onclick="handleNumberClick('9');">
             9
           </button>
           <button
@@ -155,7 +124,44 @@
     </div>
     <script>
       let currentDisplay = "";
+      let justCalculated = false;
+
       document.querySelector("#display").value = currentDisplay;
+      
+      function updateDisplay(value) {
+        currentDisplay = value;
+        document.querySelector("#display").value = currentDisplay;
+      }
+
+      function clearDisplay() {
+        currentDisplay = "";
+        justCalculated = false;
+        updateDisplay(currentDisplay);
+      }
+
+      function calculate() {
+        try {
+          let result = eval(currentDisplay);
+          if (isNaN(result) || !isFinite(result)) {
+            throw new Error("Invalid expression");
+          }
+          currentDisplay = result;
+          updateDisplay(currentDisplay);
+          justCalculated = true;
+        } catch (error) {
+          alert("Error: " + error.message);
+          clearDisplay();
+        }
+      }
+
+      function handleNumberClick(number){
+        if (justCalculated){
+          clearDisplay();
+          justCalculated = false;
+        }
+        currentDisplay += number;
+        updateDisplay(currentDisplay);
+      }
     </script>
   </body>
 </html>
